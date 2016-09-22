@@ -7,7 +7,7 @@ ___author__ = 'acmASCIS'
 import random
 
 
-class Mat2(object):
+class Matmul(object):
     def __init__(self, matrix_a_size=(3, 3), matrix_b_size=(3, 3)):
         self.__matrix_a_size = matrix_a_size
         self.__matrix_b_size = matrix_b_size

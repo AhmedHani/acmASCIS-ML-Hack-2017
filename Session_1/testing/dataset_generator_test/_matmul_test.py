@@ -8,7 +8,7 @@ import unittest
 from dataset_generator._mat2 import Mat2
 
 
-class Mat2Test(unittest.TestCase):
+class MatmulTest(unittest.TestCase):
     def setUp(self):
         self.__min = 1
         self.__max = 10
@@ -38,6 +38,11 @@ class Mat2Test(unittest.TestCase):
         for i in range(len(mat_b)):
             for j in range(len(mat_b[0])):
                 self.assertTrue(self.__max >= mat_b[i][j] >= self.__min)
+
+    def test_mul_validation(self):
+        mat_a, mat_b = self.__mat_2.get_matrices(self.__min, self.__max)
+
+        self.assertEqual(len(mat_a[0]), len(mat_b))
 
 
 if __name__ == '__main__':
