@@ -1,6 +1,5 @@
 ___author__ = 'acmASCIS'
 
-
 class DataReader(object):
     '''
     @:parameter a string that is the file path to the input file
