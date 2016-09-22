@@ -93,9 +93,56 @@ class DataReader(object):
 
             return input_arrays_list, output_arrays_list
 
-        '''
-        TODO implement the other problems data
-        '''
+        if case is "freq":
+            input_arrays_list = []
+            output_arrays_frequencies = []
+
+            if self.__input_file_extension is '.in' or self.__input_file_extension is '.txt':
+                with open(self.__input_file_path, 'wb') as reader:
+                    content = reader.readall()
+                    for line in content:
+                        array_elements = line.split(" ")
+                        array_elements = map(lambda it: int(it), array_elements)
+                        input_arrays_list.append(array_elements)
+
+            if self.__output_file_extension is '.out' or self.__output_file_extension is '.txt':
+                with open(self.__output_file_path, 'wb') as reader:
+                    content = reader.readall()
+                    for line in content:
+                        array_freq = line.split(" ")
+                        array_freq = map(lambda it: (it.split(":")[0], it.split(":")[1]), array_freq)
+                        output_arrays_frequencies.append(array_freq)
+
+            return input_arrays_list, output_arrays_frequencies
+
+        if case is "matmul":
+            input_arrays_list = []
+            output_array_results = []
+
+            if self.__input_file_extension is '.in' or self.__input_file_extension is '.txt':
+                with open(self.__input_file_path, 'wb') as reader:
+                    n_cases = int(reader.readline())
+
+                    for t in range(n_cases):
+                        matrix_a_size, matrix_b_size = reader.readline().split(" ")
+                        matrix_a = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_a_size)]]
+                        reader.readline()
+                        matrix_b = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_b_size)]]
+
+                        input_arrays_list.append((matrix_a_size, matrix_b, matrix_a, matrix_b))
+
+            if self.__output_file_extension is '.out' or self.__output_file_extension is '.txt':
+                with open(self.__output_file_path, 'wb') as reader:
+                    n_cases = int(reader.readline())
+
+                    for t in range(n_cases):
+                        row_size, column_size = reader.readline().split(" ")
+                        resulted_matrix = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(row_size)]]
+                        output_array_results.append((row_size, column_size, resulted_matrix))
+
+            return input_arrays_list, output_array_results
+
+        raise Exception("Invalid problem definition!")
 
 
 
