@@ -7,6 +7,7 @@ ___author__ = 'acmASCIS'
 import random
 from dataset_generator._sort import Sort
 from dataset_generator._matmul import Matmul
+from validator import Validator
 
 
 class Manager(object):
@@ -14,6 +15,12 @@ class Manager(object):
         super(Manager, self).__init__()
 
     def make_default_sorting_dataset(self, dataset_size=10, array_length=5):
+        """
+        Make a random generated dataset for checking the sorting algorithm correctness
+        :param dataset_size: (int) Number of arrays that would be created
+        :param array_length: (int) The array length
+        :return: input and output files path the contains the dataset and its empty output file
+        """
         file_index = random.Random().randint(0, 10)
         input_file_path = "./datasets/sorting/sort" + str(file_index) + ".in"
         output_file_path = "./datasets/sorting/sort" + str(file_index) + ".out"
@@ -28,6 +35,13 @@ class Manager(object):
         return input_file_path, output_file_path
 
     def make_custom_sorting_dataset(self, arrays):
+        """
+        Establish the target dataset from the user.
+        :param arrays: (array of arrays) each array contains integer elements
+        :return: input and output files path the contains the dataset and its empty output file
+        """
+        Validator.validate_custom_sorting_dataset(arrays)
+
         file_index = random.Random().randint(0, 10)
         input_file_path = "./datasets/sorting/sort" + str(file_index) + ".in"
         output_file_path = "./datasets/sorting/sort" + str(file_index) + ".out"
@@ -42,6 +56,12 @@ class Manager(object):
         return input_file_path, output_file_path
 
     def make_default_freq_dataset(self, dataset_size=10, array_length=5):
+        """
+        Make a random generated dataset for checking the frequency calculation algorithm correctness
+        :param dataset_size: (int) Number of arrays that would be created
+        :param array_length: (int) The array length
+        :return: input and output files path the contains the dataset and its empty output file
+        """
         file_index = random.Random().randint(0, 10)
         input_file_path = "./datasets/elements_frequency/freq" + str(file_index) + ".in"
         output_file_path = "./datasets/elements_frequency/freq" + str(file_index) + ".out"
@@ -56,6 +76,13 @@ class Manager(object):
         return input_file_path, output_file_path
 
     def make_custom_freq_dataset(self, arrays):
+        """
+        Establish the target dataset from the user.
+        :param arrays: (array of arrays) each array contains integer elements
+        :return: input and output files path the contains the dataset and its empty output file
+        """
+        Validator.validate_custom_freq_dataset(arrays)
+
         file_index = random.Random().randint(0, 10)
         input_file_path = "./datasets/elements_frequency/freq" + str(file_index) + ".in"
         output_file_path = "./datasets/elements_frequency/freq" + str(file_index) + ".out"
@@ -70,6 +97,13 @@ class Manager(object):
         return input_file_path, output_file_path
 
     def make_default_matmul_dataset(self, dataset_size=10, matrix_a_size=(3, 3), matrix_b_size=(3, 3)):
+        """
+        Make a random generated dataset for checking the matrix multiplication algorithm correctness
+        :param dataset_size: (int) an integer that specifies the number of test cases
+        :param matrix_a_size: (tuple) that specifies the first matrix size
+        :param matrix_b_size:  (tuple) that specifies the second matrix size
+        :return: input and output files path the contains the dataset and its empty output file
+        """
         file_index = random.Random().randint(0, 10)
         input_file_path = "./datasets/arrays_multipliction/matmul" + str(file_index) + ".in"
         output_file_path = "./datasets/elements_frequency/matmul" + str(file_index) + ".out"
@@ -100,6 +134,13 @@ class Manager(object):
         return input_file_path, output_file_path
 
     def make_custom_matmul_dataset(self, matrices_list):
+        """
+        Establish the target dataset from the user.
+        :param matrices_list: (array of tuples) each array contains a tuple that contains key: first matrix value: second matrix (i.e (matrix_a, matrix_b)
+        :return: input and output files path the contains the dataset and its empty output file
+        """
+        Validator.validate_custom_matmul_dataset(matrices_list)
+
         file_index = random.Random().randint(0, 10)
         input_file_path = "./datasets/arrays_multipliction/matmul" + str(file_index) + ".in"
         output_file_path = "./datasets/elements_frequency/matmul" + str(file_index) + ".out"
@@ -128,10 +169,3 @@ class Manager(object):
                             writer.write(str(matrix_b[i][j]))
 
         return input_file_path, output_file_path
-
-
-
-
-
-
-
