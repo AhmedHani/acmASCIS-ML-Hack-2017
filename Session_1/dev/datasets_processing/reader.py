@@ -5,15 +5,15 @@ ___author__ = 'acmASCIS'
 '''
 
 class DataReader(object):
-    def __init__(self, input_file_path, output_file_path):
-        """
-        @:parameter a string that is the file path to the input file
-        @:parameter a string that is the file path to the output file
+    '''
+    @:parameter a string that is the file path to the input file
+    @:parameter a string that is the file path to the output file
 
-        It only supports the following file extensions:
-        for input: .in .txt .csv
-        for output: .out .txt .csv
-        """
+    It only supports the following file extensions:
+    for input: .in .txt .csv
+    for output: .out .txt .csv
+    '''
+    def __init__(self, input_file_path, output_file_path):
         self.__input_file_path = input_file_path
         self.__output_file_path = output_file_path
 
@@ -127,12 +127,14 @@ class DataReader(object):
                     n_cases = int(reader.readline())
 
                     for t in range(n_cases):
-                        matrix_a_size, matrix_b_size = reader.readline().split(" ")
-                        matrix_a = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_a_size)]]
+                        matrix_a_size_row, matrix_a_size_col, matrix_b_size_row, matrix_b_size_col = reader.readline().split(" ")
+                        matrix_a_size = (matrix_a_size_row, matrix_a_size_col)
+                        matrix_b_size = (matrix_a_size_row, matrix_b_size_col)
+                        matrix_a = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_a_size[0])]]
                         reader.readline()
-                        matrix_b = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_b_size)]]
+                        matrix_b = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_b_size[0])]]
 
-                        input_arrays_list.append((matrix_a_size, matrix_b, matrix_a, matrix_b))
+                        input_arrays_list.append((matrix_a_size, matrix_b_size, matrix_a, matrix_b))
 
             if self.__output_file_extension is '.out' or self.__output_file_extension is '.txt':
                 with open(self.__output_file_path, 'wb') as reader:
@@ -146,9 +148,3 @@ class DataReader(object):
             return input_arrays_list, output_array_results
 
         raise Exception("Invalid problem definition!")
-
-
-
-
-
-

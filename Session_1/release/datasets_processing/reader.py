@@ -127,12 +127,14 @@ class DataReader(object):
                     n_cases = int(reader.readline())
 
                     for t in range(n_cases):
-                        matrix_a_size, matrix_b_size = reader.readline().split(" ")
-                        matrix_a = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_a_size)]]
+                        matrix_a_size_row, matrix_a_size_col, matrix_b_size_row, matrix_b_size_col = reader.readline().split(" ")
+                        matrix_a_size = (matrix_a_size_row, matrix_a_size_col)
+                        matrix_b_size = (matrix_a_size_row, matrix_b_size_col)
+                        matrix_a = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_a_size[0])]]
                         reader.readline()
-                        matrix_b = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_b_size)]]
+                        matrix_b = [[map(lambda it: int(it), reader.readline().split(" ")) for i in range(matrix_b_size[0])]]
 
-                        input_arrays_list.append((matrix_a_size, matrix_b, matrix_a, matrix_b))
+                        input_arrays_list.append((matrix_a_size, matrix_b_size, matrix_a, matrix_b))
 
             if self.__output_file_extension is '.out' or self.__output_file_extension is '.txt':
                 with open(self.__output_file_path, 'wb') as reader:
