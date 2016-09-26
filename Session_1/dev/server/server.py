@@ -50,18 +50,13 @@ def main():
     if len(server_dataset) != len(user_dataset):
         raise Exception("User and Server datasets aren't equal size!")
 
-
-
     for i in range(len(server_dataset)):
         judge = Judge(server_dataset[i], user_dataset[i])
 
         if not judge.check():
             raise Exception("Files ", server_dataset[i], "and", user_dataset[i], "aren't matched!")
 
-
     # serialization
-
-
 
 if __name__ == '__main__':
     main()
