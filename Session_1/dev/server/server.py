@@ -6,7 +6,7 @@ ___author__ = 'acmASCIS'
 
 import sys
 from judge import Judge
-import filecmp
+
 
 def main():
     if len(sys.argv) <= 1:
@@ -53,9 +53,11 @@ def main():
 
 
     for i in range(len(server_dataset)):
-        if not filecmp._cmp(server_dataset[i], user_dataset[i]):
+        judge = Judge(server_dataset[i], user_dataset[i])
+
+        if not judge.check():
             raise Exception("Files ", server_dataset[i], "and", user_dataset[i], "aren't matched!")
-    
+
 
     # serialization
 
