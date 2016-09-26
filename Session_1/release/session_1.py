@@ -8,10 +8,11 @@ from datasets_processing.reader import DataReader
 from practical._sort import Sort
 from practical._freq import Freq
 from practical._matmul import Matmul
+from submit import Submit
 
 
 def main():
-    params = {'problem_def': "", "input_file": "", "output_file": ""}
+    params = {'opt': "", "input_file": "", "output_file": ""}
 
     def set_parameters():
         if len(sys.argv) > 1:
@@ -22,9 +23,9 @@ def main():
         else:
             params['problem_def'] = "sort"  # sort || freq || matmul
             params[
-                "input_file"] = "./datasets/sorting/sort_1.in"  # sorting ||arrays_multiplication || elements_frequency
+                "input_file"] = "./datasets/sorting/sort.in"  # sorting || matmul || freq
             params[
-                "output_file"] = "./datasets/sorting/sort_1.out"  # sorting ||arrays_multiplication || elements_frequency
+                "output_file"] = "./datasets/sorting/sort.out"  # sorting || matmul || freq
 
     set_parameters()
 
@@ -32,12 +33,12 @@ def main():
     data = []
 
     def get_data():
-        input_data, output = data_reader.read(params['problem_def'])
+        input_data, output = data_reader.read(params['opt'])
         data.append((input_data, output))
 
     get_data()
 
-    if params['problem_def'] is "sort":
+    if params['opt'] is "sort":
         test_cases = data[0][0]
         output = data[0][1]
 
@@ -48,7 +49,7 @@ def main():
             output.append(sorted_array)
             #writer
 
-    if params['problem_def'] is "freq":
+    if params['opt'] is "freq":
         test_cases = data[0][0]
         output = data[0][1]
 
@@ -59,7 +60,7 @@ def main():
             output.append(freq_array)
             #writer
 
-    if params['problem_def'] is "matmul":
+    if params['opt'] is "matmul":
         test_cases = data[0][0]
         output = data[0][1]
         n_cases = len(test_cases)
@@ -72,7 +73,25 @@ def main():
             result_matrix_size = (len(result_matrix), len(result_matrix[0]))
             output.append((result_matrix_size[0], result_matrix[1], result_matrix))
 
-            #writer
+            # writer
+
+    if params['opt'] is "submit":
+        sort_input_path = "./datasets/sorting/sort.in"
+        sort_output_path = "./datasets/sorting/sort.out"
+        freq_input_path = "./datasets/freq/freq.in"
+        freq_output_path = "./datasets/freq/freq.out"
+        matmul_input_path = "./datasets/matmul/matmul.in"
+        matmul_output_path = "./datasets/matmul/matmul.out"
+
+        submit = Submit()
+        submit.send(sort_input_path, sort_output_path, freq_input_path, freq_output_path, matmul_input_path, matmul_output_path)
+        response = submit.recv()
+
+        if response is "OK":
+            #Do serialization
+
+
+
 
     # submitter to the server do the work here. Then server sends the serialized code to the google drive
 

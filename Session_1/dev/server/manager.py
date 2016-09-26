@@ -63,8 +63,8 @@ class Manager(object):
         :return: input and output files path the contains the dataset and its empty output file
         """
         file_index = random.Random().randint(0, 10)
-        input_file_path = "./datasets/elements_frequency/freq" + str(file_index) + ".in"
-        output_file_path = "./datasets/elements_frequency/freq" + str(file_index) + ".out"
+        input_file_path = "./datasets/freq/freq" + str(file_index) + ".in"
+        output_file_path = "./datasets/freq/freq" + str(file_index) + ".out"
         _sort = Sort(array_length)
 
         with open(input_file_path, "r") as writer:
@@ -84,8 +84,8 @@ class Manager(object):
         Validator.validate_custom_freq_dataset(arrays)
 
         file_index = random.Random().randint(0, 10)
-        input_file_path = "./datasets/elements_frequency/freq" + str(file_index) + ".in"
-        output_file_path = "./datasets/elements_frequency/freq" + str(file_index) + ".out"
+        input_file_path = "./datasets/freq/freq" + str(file_index) + ".in"
+        output_file_path = "./datasets/freq/freq" + str(file_index) + ".out"
 
         with open(input_file_path, "r") as writer:
             for i in range(len(arrays)):
@@ -106,7 +106,7 @@ class Manager(object):
         """
         file_index = random.Random().randint(0, 10)
         input_file_path = "./datasets/arrays_multipliction/matmul" + str(file_index) + ".in"
-        output_file_path = "./datasets/elements_frequency/matmul" + str(file_index) + ".out"
+        output_file_path = "./datasets/freq/matmul" + str(file_index) + ".out"
 
         with open(input_file_path, "r") as writer:
             writer.write(str(dataset_size))
@@ -143,7 +143,7 @@ class Manager(object):
 
         file_index = random.Random().randint(0, 10)
         input_file_path = "./datasets/arrays_multipliction/matmul" + str(file_index) + ".in"
-        output_file_path = "./datasets/elements_frequency/matmul" + str(file_index) + ".out"
+        output_file_path = "./datasets/freq/matmul" + str(file_index) + ".out"
 
         with open(input_file_path, "r") as writer:
             writer.write(str(len(matrices_list)))
