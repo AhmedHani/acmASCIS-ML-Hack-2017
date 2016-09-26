@@ -5,8 +5,8 @@ ___author__ = 'acmASCIS'
 '''
 
 import random
-from dataset_generator._sort import Sort
-from dataset_generator._matmul import Matmul
+from datasets_generator._sort import Sort
+from datasets_generator._matmul import Matmul
 from validator import Validator
 
 
