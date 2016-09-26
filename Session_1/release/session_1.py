@@ -17,15 +17,13 @@ def main():
     def set_parameters():
         if len(sys.argv) > 1:
             print "Number of Arguments: ", len(sys.argv), "arguments"
-            params['problem_def'] = sys.argv[0]
-            params["input_file"] = sys.argv[1]
-            params["output_file"] = sys.argv[2]
+            params['opt'] = sys.argv[1]
+            params["input_file"] = sys.argv[2]
+            params["output_file"] = sys.argv[3]
         else:
-            params['problem_def'] = "sort"  # sort || freq || matmul
-            params[
-                "input_file"] = "./datasets/sorting/sort.in"  # sorting || matmul || freq
-            params[
-                "output_file"] = "./datasets/sorting/sort.out"  # sorting || matmul || freq
+            params['opt'] = "sort"  # sort || freq || matmul
+            params["input_file"] = "./datasets/sorting/sort.in"  # sorting || matmul || freq
+            params["output_file"] = "./datasets/sorting/sort.out"  # sorting || matmul || freq
     set_parameters()
 
     data_reader = DataReader(params["input_file"], params["output_file"])
@@ -80,8 +78,9 @@ def main():
         freq_output_path = "./datasets/freq/freq.out"
         matmul_input_path = "./datasets/matmul/matmul.in"
         matmul_output_path = "./datasets/matmul/matmul.out"
+        project_dir = "."
 
-        submit = Submit()
+        submit = Submit(project_dir)
         submit.send(sort_input_path, sort_output_path, freq_input_path, freq_output_path, matmul_input_path, matmul_output_path)
 
     return 0
