@@ -4,16 +4,17 @@ ___author__ = 'acmASCIS'
     by ahani at {9/22/2016}
 '''
 
-class DataReader(object):
-    '''
-    @:parameter a string that is the file path to the input file
-    @:parameter a string that is the file path to the output file
 
-    It only supports the following file extensions:
-    for input: .in .txt .csv
-    for output: .out .txt .csv
-    '''
+class DataReader(object):
     def __init__(self, input_file_path, output_file_path):
+        """
+        @:parameter a string that is the file path to the input file
+        @:parameter a string that is the file path to the output file
+
+        It only supports the following file extensions:
+        for input: .in .txt .csv
+        for output: .out .txt .csv
+        """
         self.__input_file_path = input_file_path
         self.__output_file_path = output_file_path
 

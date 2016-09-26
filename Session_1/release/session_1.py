@@ -5,6 +5,7 @@ ___author__ = 'acmASCIS'
 '''
 import sys
 from datasets_processing.reader import DataReader
+from datasets_processing.writer import DataWriter
 from practical._sort import Sort
 from practical._freq import Freq
 from practical._matmul import Matmul
@@ -12,7 +13,7 @@ from submit import Submit
 
 
 def main():
-    params = {"opt": "", "input_file": "", "output_file": ""}
+    params = {'opt': "", "input_file": "", "output_file": ""}
 
     def set_parameters():
         if len(sys.argv) > 1:
@@ -34,6 +35,8 @@ def main():
         data.append((input_data, output))
     get_data()
 
+    data_writer = DataWriter(params["output_file"])
+
     if params['opt'] is "sort":
         test_cases = data[0][0]
         output = data[0][1]
@@ -43,7 +46,8 @@ def main():
             sorted_array = _sort.bubble_sort()
             # print(sorted_array)
             output.append(sorted_array)
-            #writer
+
+        data_writer.write_file(params['opt'], output, len(output))
 
     if params['opt'] is "freq":
         test_cases = data[0][0]
@@ -54,7 +58,8 @@ def main():
             freq_array = _freq.get_frequency_array()
             # print(freq_array)
             output.append(freq_array)
-            #writer
+
+        data_writer.write_file(params['opt'], output, len(output))
 
     if params['opt'] is "matmul":
         test_cases = data[0][0]
@@ -69,7 +74,7 @@ def main():
             result_matrix_size = (len(result_matrix), len(result_matrix[0]))
             output.append((result_matrix_size[0], result_matrix[1], result_matrix))
 
-            # writer
+        data_writer.write_file(params['opt'], output, n_cases)
 
     if params['opt'] is "submit":
         sort_input_path = "./datasets/sorting/sort.in"
@@ -84,7 +89,6 @@ def main():
         submit.send(sort_input_path, sort_output_path, freq_input_path, freq_output_path, matmul_input_path, matmul_output_path)
 
     return 0
-
 
 if __name__ == '__main__':
     main()
