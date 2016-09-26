@@ -12,7 +12,7 @@ from submit import Submit
 
 
 def main():
-    params = {'opt': "", "input_file": "", "output_file": ""}
+    params = {"opt": "", "input_file": "", "output_file": ""}
 
     def set_parameters():
         if len(sys.argv) > 1:
@@ -26,7 +26,6 @@ def main():
                 "input_file"] = "./datasets/sorting/sort.in"  # sorting || matmul || freq
             params[
                 "output_file"] = "./datasets/sorting/sort.out"  # sorting || matmul || freq
-
     set_parameters()
 
     data_reader = DataReader(params["input_file"], params["output_file"])
@@ -35,7 +34,6 @@ def main():
     def get_data():
         input_data, output = data_reader.read(params['opt'])
         data.append((input_data, output))
-
     get_data()
 
     if params['opt'] is "sort":
@@ -85,15 +83,6 @@ def main():
 
         submit = Submit()
         submit.send(sort_input_path, sort_output_path, freq_input_path, freq_output_path, matmul_input_path, matmul_output_path)
-        response = submit.recv()
-
-        if response is "OK":
-            #Do serialization
-
-
-
-
-    # submitter to the server do the work here. Then server sends the serialized code to the google drive
 
     return 0
 
